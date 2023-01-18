@@ -210,7 +210,7 @@ function showhide(id) {
 <div id="invitedspeakers" class="content-section-a" style="border-top: 0">
   <div class="col-md-6 col-md-offset-3 text-center wrap_title">
     <h2>Keynote Speakers</h2> <br/>
-    </div>
+  </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-6 wow fadeInDown text-center"> <img class="magnify img-circle" src="img/speakers/Xiaowen-Dong.jpg" alt="Xiaowen" width="200px" height="200px">
@@ -463,6 +463,17 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
             </p>
              <p> He has a B.Sc. in mathematics from the Chinese University of Hong Kong and a Ph.D. in applied mathematics from the University of Maryland, College Park. Before joining Duke Kunshan, he served as a post-doctorate researcher at the University of Minnesota, Twin Cities. </p>
         </div>
+        </div>
+
+        <div class="col-sm-4  wow fadeInDown text-center"> <img class="magnify img-circle" src="img/speakers/xinliang 1.png" alt="Xinliang" width="200px" height="200px">
+        <h3>Xinliang Liu</h3>
+        <p class="lead" style="margin-bottom:0;">KAUST</p>
+        <a onclick="showhide('Xinliang')">Show/Hide Bio</a>
+        <div style="display: none; text-align: left; text-indent: 30px;" id="Xinliang">
+          <p> Dr Xinliang Liu is a postdoc in KAUST. He is working on deep learning methods for numerical PDE and graph neural networks. He obtained his PhD in Mathematics from Shanghai Jiao Tong University.
+            </p>
+        </div>
+      </div>
         <br/>
         <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
       </div>
@@ -473,7 +484,7 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
 </div>
 
 <!-- Schedule -->
-<div id ="schedule" class="content-section-b">
+<div id ="schedule" class="content-section-a">
   <div class="container">
     <h2 class="section-heading">Schedule</h2>
     <p class="lead">to be confirmed</p>
@@ -1234,33 +1245,16 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
       </div>
     </div>
   </div> -->
-  <div id="organizers" class="content-section-a" style="border-top: 0">
+  </div>
+</div>
+
+<div id="organizers" class="content-section-a" style="border-top: 0">
     <div class="container">
       <h2 class="section-heading">Organizers</h2>
       <div class="row wow fadeInRightBig"  data-animation-delay="200">
-        <!-- <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200"> -->
-        <!-- <div class="col-sm-4 wow fadeInRightBig"  data-animation-delay="200"></div>
-          <h4 class="section-heading">
-            <center>
-              Jonas <br>
-              Adler
-            </center>
-          </h4>
-          <center>
-            <img  class="magnify img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/jonas_adler.jpg" alt="Photo of Jonas Adler">
-          </center>
-          <h5 class="section-heading">
-            <center>
-              <i>DeepMind</i>
-            </center>
-          </h5>
-        </div> -->
         <div class="col-sm-4 wow fadeInRightBig"  data-animation-delay="200">
-            <!-- <p><a class="btn btn-embossed btn-primary view" role="button">View Details</a></p> -->
           <h4 class="section-heading">
             <center>
-              <!-- Namrata <br>
-              Anand -->
               Yu Guang Wang
             </center>
           </h4>
@@ -1303,109 +1297,24 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
             </center>
           </h5>
         </div>
-        <!-- <div class="row wow fadeInRightBig"  data-animation-delay="200">
-          <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">
-            <h4 class="section-heading">
-              <center>
-                Sergey <br>
-                Ovchinnikov
-              </center>
-            </h4>
-            <center>
-              <img  class="magnify img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/sergey_ovchinnikov.jpg" alt="Photo of Sergey Ovchinnikov">
-            </center>
-            <h5 class="section-heading">
-              <center>
-                <i>Harvard University</i>
-              </center>
-            </h5>
-          </div>
-          <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">
-            <h4 class="section-heading">
-              <center>
-                Roshan <br>
-                Rao
-              </center>
-            </h4>
-            <center>
-              <img  class="magnify img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/roshan_rao.jpg" alt="Photo of Roshan Rao">
-            </center>
-            <h5 class="section-heading">
-              <center>
-                <i>Meta AI</i>
-              </center>
-            </h5>
-          </div>
-          <div class="col-sm-2 wow fadeInRightBig"  data-animation-delay="200">
-            <h4 class="section-heading">
-              <center>
-                Ellen <br>
-                Zhong
-              </center>
-            </h4>
-            <center>
-              <img  class="magnify img-responsive img-rounded" style="border-radius: 50%" height="150" width="150" src="img/organizer/ellen_zhong.jpg" alt="Photo of Ellen Zhong">
-            </center>
-            <h5 class="section-heading">
-              <center>
-                <i>Princeton</i>
-              </center>
-            </h5>
-          </div>
-        </div> -->
       </div>
     </div>
-  </div> 
-
-  <!--
-	<div id="related" class="content-section-b" style="border-top: 0">
-        <div class="container" id="related">
-		    <h2 class="section-heading">Related Workshops</h2>
-            <div class="row">
-                <div class="col-md-12 wow fadeInRightBig" data-animation-delay="200">
-                    <p class="lead"> Here are some <a href="https://neurips.cc/Conferences/2021/Schedule?type=Workshop">related workshops at NeurIPS</a> covering structure, biology, and healthcare this year:
-                    <ul class="bulleted">
-                        <li><a href="https://neurips.cc/Conferences/2020/Schedule?showEvent=21870">Learning Meaningful Representations for Life</a></li>
-                        <li><a href="https://neurips.cc/Conferences/2020/Schedule?showEvent=21862">Machine Learning and the Physical Sciences</a> </li>
-                        <li><a href="https://neurips.cc/Conferences/2020/Schedule?showEvent=21834">MLPH: Machine Learning in Public Health</a></li>
-						<li><a href="https://neurips.cc/Conferences/2021/Schedule?showEvent=21849">AI for Science: Mind the Gaps</a></li>
-						<li><a href="https://neurips.cc/Conferences/2020/Schedule?showEvent=21882">Differentiable Programming</a></li>
-                    </ul>
-				</div>
-            </div>
-        </div>
-        <br/>
-		<br/>
-		<div class="container">
-			<div class="row wow fadeInLeftBig"  data-animation-delay="200">
-				<div class="col-md-12 wow fadeInLeftBig"  data-animation-delay="200">
-					<div class="center">
-						<img  class="center" style="" height="200" src="./img/letters.png" alt="Letters">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    -->
+</div>
 
 <!-- 赞助 -->
-  <div id="sponsors" class="content-section-a" style="border-top: 0">
+<div id="sponsors" class="content-section-a" style="border-top: 0">
     <div class="container">
       <h2 class="section-heading">Sponsors</h2><br/>
       <div class="row align-items-center justify-content-center wow fadeInLeftBig"  data-animation-delay="200">
-        <div class="col-md-6 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="100" src="./img/applmathcenter.png" alt="SNC Logo"> </div>
-        <div class="col-md-6 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="100" src="./img/ins-1.png" alt="ins Logo"> </div>
+        <div class="col-md-6 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="100" src="./img/applmathcenter.png" alt="SNC Logo"> 
+        </div>
+        <div class="col-md-6 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="100" src="./img/ins-1.png" alt="ins Logo"> 
+        </div>
         <!-- <div class="col-md-4 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="100" src="./img/Toursun.png" alt="Toursun Logo"> </div> -->
       </div>
-      <!-- <br>
-      <br> -->
-      <!-- <div class="row align-items-center justify-content-center wow fadeInLeftBig"  data-animation-delay="200">
-        <div class="col-md-6 wow fadeInLeftBig"  data-animation-delay="200"> <img  class="center" style="" height="150" src="./img/Toursun.png" alt="Prescient Logo"> 
-        </div>
-      </div>  -->
-    </div>
-  </div>
+   </div>
 </div>
+
 <footer>
   <div class="container">
     <div class="row">
