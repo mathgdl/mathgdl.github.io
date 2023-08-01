@@ -23,6 +23,70 @@
   tr:nth-child(even) {background-color: #f2f2f2;}
   </style>
 
+<!-- <script>
+// Timezone converter function 
+function convertTime(date, offset) {
+  var utcDate = new Date(date.toLocaleString('en-US', {timeZone: 'Asia/Tokyo'}));
+  var newDate = new Date(utcDate.getTime() + (offset*60*60*1000));
+  return newDate.toLocaleTimeString(); 
+}
+
+// Get user's timezone offset
+var offset = new Date().getTimezoneOffset()/60; 
+
+// Convert times on page load
+window.onload = function() {
+  var times = document.querySelectorAll("td:nth-child(2)");
+  for(var i=0; i<times.length; i++) {
+    var tokyoTime = times[i].textContent; 
+    var localTime = convertTime(new Date("08/21/2023 " + tokyoTime), offset);
+    times[i].textContent = localTime;
+  }
+}
+
+</script> -->
+
+<script>
+// Timezone converter function
+function convertTime(date, offset) {
+
+  // Parse Tokyo time as HH:mm
+  var tokyoTime = date.toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  });
+
+  var utcDate = new Date(date.toLocaleString('en-US', {timeZone: 'Asia/Tokyo'}));
+  
+  var newDate = new Date(utcDate.getTime() + (offset * 60 * 60 * 1000));
+
+  // Return local time in HH:mm format
+  return newDate.toLocaleTimeString('en-US', { 
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+// Get user's timezone offset
+var offset = new Date().getTimezoneOffset()/60;
+
+// Convert times on page load
+window.onload = function() {
+
+  var times = document.querySelectorAll("td:nth-child(2)");
+  
+  for(var i=0; i<times.length; i++) {
+
+    var tokyoTime = times[i].textContent;
+    
+    // Convert and update time in HH:mm format
+    times[i].textContent = convertTime(new Date("08/21/2023 " + tokyoTime), offset);
+
+  }
+
+}
+</script>
+
 </head>
 
 
@@ -560,42 +624,22 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
         <b>Zoom for online talks</b>: TBA
         
         </p>
-      
-        <p id="timezone"></p> 
 
         <script>
-        fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          const timezone = data.timezone;
-          document.getElementById('timezone').innerText = `Your timezone: ${timezone}`;
-          
-          const tokyoTime = 'Asia/Tokyo';
-          const tableRows = document.querySelectorAll('table tr');
-          
-          tableRows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            const dateCell = cells[0];
-            const timeCell = cells[1];
-            
-            // Extract date and time
-            const [date, time] = timeCell.innerText.split(' ');
-            
-            // Convert time from Tokyo time to user's timezone
-            const tokyoDateTime = Luxon.DateTime.fromFormat(`${date} ${time}`, 'd MMM HH:mm', { zone: tokyoTime });
-            const userDateTime = tokyoDateTime.setZone(timezone);
-            
-            // Update cell with user's local time
-            timeCell.innerText = userDateTime.toFormat('HH:mm'); 
-          });
-        });
+          fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('timezone').textContent = data.timezone;
+            });
         </script>
-          
 
+        <p>Your timezone: <span id="timezone"></span></p>
+      
+      <!-- <div id = "timezone"></div> -->
       <table>
-      <tr>   
+      <tr>  
       <th style="width:80px;">Date</th>
-      <th style="width:80px;">Time (<div id="timezone"></div>)</th>
+      <th style="width:80px;">Time</th>
       <th style="width:80px;">Room</th>
       <th style="width:300px;">Speaker</th>
       <th>Title</th>
@@ -785,6 +829,21 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
       </tr> 
       
       </table>
+
+      <script>
+        
+        const rows = document.querySelectorAll('table tr');
+        const times = Array.from(rows).map(...) 
+        
+        getTimezoneAndConvertTimes(times).then(convertedTimes => {
+        
+          rows.forEach((row, i) => {
+            ...
+          });
+        
+        });
+        
+        </script>
       
   </div>
 </div>
