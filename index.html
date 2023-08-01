@@ -46,47 +46,6 @@ window.onload = function() {
 
 </script> -->
 
-<script>
-// Timezone converter function
-function convertTime(date, offset) {
-
-  // Parse Tokyo time as HH:mm
-  var tokyoTime = date.toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit' 
-  });
-
-  var utcDate = new Date(date.toLocaleString('en-US', {timeZone: 'Asia/Tokyo'}));
-  
-  var newDate = new Date(utcDate.getTime() + (offset * 60 * 60 * 1000));
-
-  // Return local time in HH:mm format
-  return newDate.toLocaleTimeString('en-US', { 
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-// Get user's timezone offset
-var offset = new Date().getTimezoneOffset()/60;
-
-// Convert times on page load
-window.onload = function() {
-
-  var times = document.querySelectorAll("td:nth-child(2)");
-  
-  for(var i=0; i<times.length; i++) {
-
-    var tokyoTime = times[i].textContent;
-    
-    // Convert and update time in HH:mm format
-    times[i].textContent = convertTime(new Date("08/21/2023 " + tokyoTime), offset);
-
-  }
-
-}
-</script>
-
 </head>
 
 
@@ -622,45 +581,37 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
         On August 21, sessions will be held in Room 1C (13:30-15:00) and Room 1D (15:30-17:10). 
         On August 22, sessions will be in Room 1E (13:30-15:00) and Room 2C (15:30-17:10).</br></br>
         <b>Zoom for online talks</b>: TBA
-        
-        </p>
+      </p>
 
-        <script>
-          fetch('https://ipapi.co/json/')
-            .then(response => response.json())
-            .then(data => {
-              document.getElementById('timezone').textContent = data.timezone;
-            });
-        </script>
-
-        <p>Your timezone: <span id="timezone"></span></p>
       
-      <!-- <div id = "timezone"></div> -->
-      <table>
+    <!-- <table id="timeTable">
       <tr>  
-      <th style="width:80px;">Date</th>
-      <th style="width:80px;">Time</th>
-      <th style="width:80px;">Room</th>
-      <th style="width:300px;">Speaker</th>
-      <th>Title</th>
+          <th style="width:120px;">Date</th>
+          <th style="width:120px;">Time (Tokyo)</th>
+          <th style="width:120px;">Time (Local)</th>
+          <th style="width:120px;">Room</th>
+          <th style="width:300px;">Speaker</th>
+          <th>Title</th>
       </tr>
 
-      <tr> <td colspan="5" align="center"><b>Day 1</b></td> </tr>
+      <tr> <td colspan="6" align="center"><b>Day 1</b></td> </tr>
 
       <tr>
-        <td>Aug 21</td>
-        <td>13:30</td>
-        <td>1C</td>
-        <td><i>Yuguang Wang</i> (SJTU)</td>
-        <td>Opening Remarks</td>
+          <td>Aug 21</td>
+          <td id="tokyoTime">13:30</td>
+          <td id="localTime">13:30</td>
+          <td>1C</td>
+          <td><i>Yuguang Wang</i> (SJTU)</td>
+          <td>Opening Remarks</td>
       </tr>
-      
+
       <tr>
-      <td>Aug 21</td>
-      <td>13:40</td>
-      <td>1C</td>
-      <td><i>Xiaowen Dong</i> (Oxford)</td>
-      <td>On the stability of spectral graph filters and beyond</td>
+          <td>Aug 21</td>
+          <td id="tokyoTime">13:40</td>
+          <td id="localTime">13:40</td>
+          <td>1C</td>
+          <td><i>Xiaowen Dong</i> (Oxford)</td>
+          <td>On the stability of spectral graph filters and beyond</td>
       </tr>
       
       <tr>
@@ -783,19 +734,8 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
           <td>Geometric Deep Learning from a Topological Viewpoint</td>
         </tr>
 
-      <!-- <tr>
-        <td>Aug 22</td>  
-        <td>17:30</td>
-        <td>1D</td>
-        <td><i>Challenger Mishra</i> (Cambridge)</td>
-        <td>TBA</td>
-      </tr> -->
-
       <tr> <td colspan="5" align="center"><b>Day 2</b></td> </tr>
 
-     
-      
-  
       <tr>
         <td>Aug 22</td>
         <td>13:20</td>
@@ -828,22 +768,258 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
       <td>Dynamic systems for neural message passing on graphs</td>
       </tr> 
       
-      </table>
+      </table> -->
 
-      <script>
-        
-        const rows = document.querySelectorAll('table tr');
-        const times = Array.from(rows).map(...) 
-        
-        getTimezoneAndConvertTimes(times).then(convertedTimes => {
-        
-          rows.forEach((row, i) => {
-            ...
-          });
-        
-        });
-        
-        </script>
+<table id="timeTable">
+  <tr>
+  <th style="width:90px;">Date</th>
+  <th style="width:120px;">Time (Tokyo)</th>
+  <th style="width:120px;">Time (Local)</th>
+  <th style="width:120px;">Room</th>
+  <th style="width:300px;">Speaker</th>
+  <th>Title</th>
+  </tr>
+
+  <tr> <td colspan="6" align="center"><b>Day 1</b></td> </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">13:30</td>
+    <td id="localTime">Loading ...</td> 
+    <td>1C</td>
+    <td><i>Yuguang Wang</i> (SJTU)</td>
+    <td>Opening Remarks</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">13:40</td>
+  <td id="localTime">13:40</td>
+  <td>1C</td>
+  <td><i>Xiaowen Dong</i> (Oxford)</td>
+  <td>On the stability of spectral graph filters and beyond</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">14:10</td>
+  <td id="localTime">Loading ...</td>
+  <td>1C</td>
+  <td><i>Xiaosheng Zhuang</i> (CityU HK)</td>
+  <td>Spherical Framelets with Directionality for Spherical Neural Networks</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">14:30</td>
+  <td id="localTime">Loading ...</td>
+  <td>1C</td>
+  <td><i>Huan Xiong</i> (HIT & MBZUAI)</td>
+  <td>Some Applications of Hyperplane Arrangements in Deep Learning</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">14:50</td>
+  <td id="localTime">Loading ...</td>
+  <td>1C</td>
+  <td><i>Yiqing Shen</i> (JHU)</td>
+  <td>Graph-Structured Knowledge Enhanced Large Language Model</td>
+  </tr>
+  
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">15:10</td>
+    <td id="localTime">Loading ...</td>
+    <td>Lobby</td>
+    <td></td>
+    <td colspan="2" align="center"><i>Tea break</i></td>
+  </tr>
+
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">15:30</td>
+  <td id="localTime">Loading ...</td>
+  <td>1D</td>
+  <td><i>Gitta Kutyniok</i> (LMU)</td>
+  <td>Generalization Capabilities of Graph Neural Networks</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">16:10</td>
+  <td id="localTime">Loading ...</td>
+  <td>1D</td>
+  <td><i>Qi Ye</i> (SCNU)</td>
+  <td>Machine Learning in Banach Spaces: A Black-box or White-box Method?</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">16:30</td>
+  <td id="localTime">Loading ...</td>
+  <td>1D</td>
+  <td><i>Dongmian Zou</i> (DKU)</td>
+  <td>Stable Hyperbolic Neural Networks for Graph Generation and Classification</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">16:50</td>
+  <td id="localTime">Loading ...</td>
+  <td>1D</td>
+  <td><i>Teresa Huang</i> (JHU)</td>
+  <td>Spectral-Inspired Graph Neural Networks</td>
+  </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">17:10</td> 
+    <td id="localTime">Loading ...</td>
+    <td>Lobby</td>
+    <td></td>
+    <td colspan="2" align="center"><i>Tea break</i></td>
+  </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">17:40</td>
+    <td id="localTime">Loading ...</td>
+    <td>1E</td>
+    <td><i>Junyu Xuan</i> (UTS)</td>
+    <td>Negative sampling for graph neural networks based on determinantal point processes</td>
+  </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">18:00</td>
+    <td id="localTime">Loading ...</td>
+    <td>1E</td>
+    <td><i>Yuanhong Jiang</i> (SJTU)</td>
+    <td>Scattering Message Passing</td>
+  </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">18:20</td>
+    <td id="localTime">Loading ...</td>
+    <td>1E</td>
+    <td><i>Kai Yi</i> (UNSW)</td>
+    <td>Geometric Diffusion Generative model for protein sequence design</td>
+  </tr>
+  
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">18:40</td>
+  <td id="localTime">Loading ...</td>
+  <td>1E</td>
+  <td><i>Sho Sonoda</i> (RIKEN)</td>
+  <td>Ridgelet Transforms of Neural Network on Manifolds and Hilbert Spaces</td>
+  </tr>
+
+  <tr>
+  <td>Aug 21</td>
+  <td id="tokyoTime">19:00</td>
+  <td id="localTime">Loading ...</td>
+  <td>Online</td>
+  <td><i>Francesco Di Giovanni</i> (Cambridge)</td>
+  <td>On oversquashing and expressivity: can GNNs mix variables?</td>
+  </tr>
+
+  <tr>
+    <td>Aug 21</td>
+    <td id="tokyoTime">19:20</td>
+    <td id="localTime">Loading ...</td>
+    <td>Online</td>
+    <td><i>Cristian Bodnar</i> (Microsoft)</td>
+    <td>Geometric Deep Learning from a Topological Viewpoint</td>
+  </tr>
+
+<tr> <td colspan="6" align="center"><b>Day 2</b></td> </tr>
+
+<tr>
+  <td>Aug 22</td>
+  <td id="tokyoTime">13:20</td>
+  <td id="localTime">Loading ...</td>
+  <td>2C</td>
+  <td><i>Guido Montufar</i> (UCLA & MPI)</td>
+  <td>FoSR: First-order spectral rewiring for addressing oversquashing in GNNs</td>
+</tr>
+
+<tr>
+<td>Aug 22</td>
+<td id="tokyoTime">13:50</td>
+<td id="localTime">Loading ...</td>
+<td>2C</td>
+<td><i>Mengjia Xu</i> (BrownU & MIT)</td>
+<td>DynG2G: An Efficient Stochastic Graph Embedding Method for Temporal Graphs</td>
+</tr>
+
+<tr>
+<td>Aug 22</td>
+<td id="tokyoTime">14:10</td>
+<td id="localTime">Loading ...</td> 
+<td>2C</td>
+<td><i>Lin Liu</i> (SJTU)</td>
+<td>Root-n consistent semiparametric learning under minimal sparsity conditions</td>
+</tr>
+
+<tr>
+<td>Aug 22</td>
+<td id="tokyoTime">14:30</td>
+<td id="localTime">Loading ...</td>
+<td>2C</td>
+<td><i>Yuelin Wang</i> (SJTU)</td>
+<td>Dynamic systems for neural message passing on graphs</td>
+</tr>
+
+</table>
+
+
+<!-- Your JavaScript code to update the local time based on the Tokyo time -->
+<script>
+  // Function to convert Tokyo time to Local time
+  function convertToLocaleTime(tokyoTime) {
+      // Replace 'Asia/Tokyo' with the appropriate timezone for your conference
+      const tokyoTimeZone = 'Asia/Tokyo';
+      const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      const tokyoDate = new Date(`2023-08-21T${tokyoTime}:00.000Z`); // Assuming the conference is in 2023
+      const localDate = new Date(tokyoDate.toLocaleString('en-US', { timeZone: localTimeZone }));
+
+      return localDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Function to update the local time for each row
+  function updateLocalTimes() {
+      const tokyoTimeElements = document.querySelectorAll('#tokyoTime');
+      const localTimeElements = document.querySelectorAll('#localTime');
+      for (let i = 0; i < tokyoTimeElements.length; i++) {
+          const tokyoTimeElement = tokyoTimeElements[i];
+          const localTimeElement = localTimeElements[i];
+          localTimeElement.textContent = convertToLocaleTime(tokyoTimeElement.textContent);
+      }
+  }
+
+  // Call the function to update the local time on page load
+  updateLocalTimes();
+
+  // Get the local IP and update the local time when the browser is refreshed
+  window.addEventListener('load', async () => {
+      try {
+          const response = await fetch('https://api64.ipify.org?format=json');
+          const data = await response.json();
+          const localIP = data.ip;
+          // Optionally, you can do something with the local IP here
+          console.log('Local IP:', localIP);
+
+          // Update the local time after fetching the local IP
+          updateLocalTimes();
+      } catch (error) {
+          console.error('Error fetching the local IP:', error);
+      }
+  });
+</script>
       
   </div>
 </div>
