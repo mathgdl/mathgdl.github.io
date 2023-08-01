@@ -22,7 +22,12 @@
   
   tr:nth-child(even) {background-color: #f2f2f2;}
   </style>
+
 </head>
+
+
+
+
   
   
 <!--<![endif]-->
@@ -547,8 +552,8 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
     <h2 class="section-heading">Schedule</h2>
       
       <p class="lead">
-        The ICIAM 2023 Conference sessions will be held from 13:30 to 17:10 over two days, 
-        August 21 and August 22, with a mid-afternoon break from 15:00 to 15:30 each day. 
+        The ICIAM 2023 Conference sessions will be held on the Tokyo local afternoon (UTC+9) over two days, 
+        August 21 and August 22. 
         Keynote speakers are allotted 30 minutes and invited speakers 20 minutes including Q&A. 
         On August 21, sessions will be held in Room 1C (13:30-15:00) and Room 1D (15:30-17:10). 
         On August 22, sessions will be in Room 1E (13:30-15:00) and Room 2C (15:30-17:10).</br></br>
@@ -556,10 +561,41 @@ Montufar is a 2022 Alfred P. Sloan Research Fellow.
         
         </p>
       
+        <p id="timezone"></p> 
+
+        <script>
+        fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const timezone = data.timezone;
+          document.getElementById('timezone').innerText = `Your timezone: ${timezone}`;
+          
+          const tokyoTime = 'Asia/Tokyo';
+          const tableRows = document.querySelectorAll('table tr');
+          
+          tableRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const dateCell = cells[0];
+            const timeCell = cells[1];
+            
+            // Extract date and time
+            const [date, time] = timeCell.innerText.split(' ');
+            
+            // Convert time from Tokyo time to user's timezone
+            const tokyoDateTime = Luxon.DateTime.fromFormat(`${date} ${time}`, 'd MMM HH:mm', { zone: tokyoTime });
+            const userDateTime = tokyoDateTime.setZone(timezone);
+            
+            // Update cell with user's local time
+            timeCell.innerText = userDateTime.toFormat('HH:mm'); 
+          });
+        });
+        </script>
+          
+
       <table>
-      <tr>  
+      <tr>   
       <th style="width:80px;">Date</th>
-      <th style="width:80px;">Time</th>
+      <th style="width:80px;">Time (<div id="timezone"></div>)</th>
       <th style="width:80px;">Room</th>
       <th style="width:300px;">Speaker</th>
       <th>Title</th>
